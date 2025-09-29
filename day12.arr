@@ -68,4 +68,3 @@ end
 with-precip-buckets = build-column(weather-data, "precip-category", lam(r :: Row) -> String: bucket-precip(r["precipitation"]) end)
 
 freq-bar-chart(with-precip-buckets, "precip-category")
-  
