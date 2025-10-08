@@ -26,10 +26,8 @@ end
 fun sum-even-numbers(num-list :: List<Number>) -> Number block:
   var total = 0
   for each(n from num-list):
-    if num-modulo(n, 2) == 0:
+    when num-modulo(n, 2) == 0:
     total := total + n
-    else:
-      total
     end
   end
   total
@@ -54,10 +52,8 @@ end
 fun any-negative(list-num :: List<Number>) -> Boolean block:
   var negatives = false
   for each(n from list-num):
-    if n < 0:
+    when n < 0:
       negatives := true
-    else:
-      negatives
     end
   end
     negatives
@@ -70,10 +66,8 @@ end
 fun all-short-words(l :: List) -> Boolean block:
   var short-words = true
   for each(n from l):
-    if string-length(n) > 4:
+    when string-length(n) > 4:
       short-words := false
-    else:
-      short-words
     end
   end
   short-words
@@ -83,14 +77,17 @@ where:
   all-short-words([list: "Mike", "John", "Will"]) is true
 end
 
-#| fun reverse-list(l :: List) -> List block:
+fun reverse-list(l :: List) -> List block:
   var items = [list:]
   for each(n from l):
-    items := L.append(items, n)
+    items := L.push(items, n)
   end
   items
+where:
+  reverse-list([list: "James", "Jay"]) is [list: "Jay", "James"]
+  reverse-list([list: "Ellen", "Alvaro", "Russell"]) is [list: "Russell", "Alvaro", "Ellen"]
+  reverse-list([list: "Konrad"]) is [list: "Konrad"]
 end
-|#
 
 fun concat-all(list-string :: List<String>) -> String block:
   var strings = ""
