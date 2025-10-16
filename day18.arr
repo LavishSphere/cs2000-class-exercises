@@ -33,18 +33,30 @@ joe-rogan-experience = podcast("The Joe Rogan Experience", "Joe Rogan", 45)
 
 fun book-summary(b :: BookRecord) -> String:
   b.title + " by " + b.author + " with " + num-to-string(b.pages) + " pages"
+where:
+  book-summary(the-dispossessed) is "The Dispossessed by Ursula K. Le Guin with 387 pages"
+  book-summary(to-the-lighthouse) is "To the Lighthouse by Virginia Woolf with 209 pages"
 end
 
 fun is-long-book(b :: BookRecord) -> Boolean:
   b.pages > 350
+where:
+  is-long-book(the-dispossessed) is true
+  is-long-book(to-the-lighthouse) is false
 end
 
 fun podcast-summary(p :: PodcastRecord) -> String:
   p.title + " by " + p.creator + " - " + num-to-string(p.length-in-min) + " minutes"
+where:
+  podcast-summary(ramsey-show) is "The Ramsey Show by Dave Ramsey - 60 minutes"
+  podcast-summary(joe-rogan-experience) is "The Joe Rogan Experience by Joe Rogan - 45 minutes"
 end
 
 fun row-to-recipe(r :: Row) -> RecipeRecord:
   recipe(r["title"], r["servings"], r["prep-time"])
+where:
+  row-to-recipe(recipes.row-n(0)) is recipe("Classic Pancakes", 4, 15)
+  row-to-recipe(recipes.row-n(1)) is recipe("Banana Oatmeal Muffins", 12, 20)
 end
 
 build-column(recipes, "recipe", row-to-recipe)
