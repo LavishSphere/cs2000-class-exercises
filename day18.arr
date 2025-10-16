@@ -32,6 +32,7 @@ ramsey-show = podcast("The Ramsey Show", "Dave Ramsey", 60)
 joe-rogan-experience = podcast("The Joe Rogan Experience", "Joe Rogan", 45)
 
 fun book-summary(b :: BookRecord) -> String:
+  doc: "makes a string summary info for book"
   b.title + " by " + b.author + " with " + num-to-string(b.pages) + " pages"
 where:
   book-summary(the-dispossessed) is "The Dispossessed by Ursula K. Le Guin with 387 pages"
@@ -39,6 +40,7 @@ where:
 end
 
 fun is-long-book(b :: BookRecord) -> Boolean:
+  doc: "checks if book is longer than 350 pages"
   b.pages > 350
 where:
   is-long-book(the-dispossessed) is true
@@ -46,6 +48,7 @@ where:
 end
 
 fun podcast-summary(p :: PodcastRecord) -> String:
+  doc: "makes a string summary for podcast"
   p.title + " by " + p.creator + " - " + num-to-string(p.length-in-min) + " minutes"
 where:
   podcast-summary(ramsey-show) is "The Ramsey Show by Dave Ramsey - 60 minutes"
@@ -53,6 +56,7 @@ where:
 end
 
 fun row-to-recipe(r :: Row) -> RecipeRecord:
+  doc: "Creates a recipe"
   recipe(r["title"], r["servings"], r["prep-time"])
 where:
   row-to-recipe(recipes.row-n(0)) is recipe("Classic Pancakes", 4, 15)
