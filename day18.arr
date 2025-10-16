@@ -63,4 +63,4 @@ where:
   row-to-recipe(recipes.row-n(1)) is recipe("Banana Oatmeal Muffins", 12, 20)
 end
 
-build-column(recipes, "recipe", row-to-recipe)
+recipe-record-table = build-column(recipes, "recipe", row-to-recipe)
