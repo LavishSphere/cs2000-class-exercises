@@ -24,7 +24,7 @@ where:
 end
 
 fun contains-n(nl :: NumList, n :: Number) -> Boolean:
-  doc: "Tells you if the number is in the list"
+  doc: "Tells you if the number is in the NumList"
   cases (NumList) nl:
     | nl-empty => false
     | nl-link(first, rest) =>
@@ -40,4 +40,31 @@ where:
   contains-n(nl-link(7, nl-empty), 2) is false
   contains-n(nl-link(0, nl-link(7, nl-empty)), 7) is true
   contains-n(nl-link(0, nl-link(7, nl-link(7, nl-empty))), 1) is false
+end
+
+fun total-sum(nl :: NumList) -> Number:
+  doc: "Adds all the numbers in the NumList"
+  cases (NumList) nl:
+    | nl-empty => 0
+    | nl-link(first, rest) =>
+      first + total-sum(rest)
+  end
+where:
+  total-sum(nl-empty) is 0
+  total-sum(nl-link(7, nl-empty)) is 7
+  total-sum(nl-link(0, nl-link(7, nl-empty))) is 7
+  total-sum(nl-link(1, nl-link(7, nl-link(7, nl-empty)))) is 15
+end
+
+fun remove-3(nl :: NumList) -> NumList:
+  doc: "Removes all the 3s from the NumList"
+  cases (NumList) nl:
+    | nl-empty => nl-empty
+    | nl-link(first, rest) =>
+      if first == 3:
+        remove-3(rest)
+      else:
+        rest
+      end
+  end
 end
