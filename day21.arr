@@ -97,7 +97,7 @@ end
 fun total-sum-of-lists(nll :: NumListList) -> NumList:
   doc: "Takes the sum of each numlist into a single numlist"
   cases (NumListList) nll:
-    | nll-empty => nl-empty
+    | nll-empty => nl-emp
     | nll-link(first, rest) =>
       nl-link(total-sum(first), total-sum-of-lists(rest))
   end
