@@ -4,6 +4,26 @@ data NumList:
 | nl-link(first :: Number, rest :: NumList)
 end
 
+data NumListList:
+  | nll-empty
+  | nll-link(first :: NumList, rest :: NumListList)
+end
+
+data StrList:
+  | sl-empty
+  | sl-link(first :: String, rest :: StrList)
+end
+#|
+fun str-list-fun(sl :: StrList) -> ???:
+  cases (StrList) nl:
+    | sl-empty => ...
+    | sl-link(first, rest) =>
+      ... first ...
+      ... num-list-fun(rest) ...
+  end
+end
+|#
+
 fun num-7s(nl :: NumList) -> Number:
   doc: "Tells you how many number 7s there are"
   cases (NumList) nl:
@@ -64,7 +84,25 @@ fun remove-3(nl :: NumList) -> NumList:
       if first == 3:
         remove-3(rest)
       else:
-        rest
+        nl-link(first, remove-3(rest))
       end
   end
+where:
+  remove-3(nl-empty) is nl-empty
+  remove-3(nl-link(3, nl-empty)) is nl-empty
+  remove-3(nl-link(0, nl-link(3, nl-empty))) is nl-link(0, nl-empty)
+  remove-3(nl-link(1, nl-link(7, nl-link(3, nl-empty)))) is nl-link(1, nl-link(7, nl-empty))
+end
+
+fun total-sum-of-lists(nll :: NumListList) -> NumList:
+  doc: "Takes the sum of each numlist into a single numlist"
+  cases (NumListList) nll:
+    | nll-empty => nl-empty
+    | nll-link(first, rest) =>
+      nl-link(total-sum(first), total-sum-of-lists(rest))
+  end
+where:
+  list1 = nl-link(1, nl-link(7, nl-link(3, nl-empty)))
+  list2 = nl-link(0, nl-link(3, nl-empty))
+  total-sum-of-lists(nll-link(list1, nll-link(list2, nll-empty))) is nl-link(11, nl-link(3, nl-empty))
 end
