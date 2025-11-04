@@ -1,3 +1,5 @@
+import pytest
+
 def add_shipping(order_amt: float) -> float:
     """ adds 4 for orders <= 10 (but non-zero), 8 for orders < 30, 12 for larger orders """
     if order_amt == 0:
@@ -8,7 +10,7 @@ def add_shipping(order_amt: float) -> float:
         return order_amt + 8
     else:
         return order_amt + 12
-    
+
 
 def gadget_cost(num_gadgets: int, label: str) -> float:
     """ computes cost, at $0.50 per gadget plus $0.05 per character in label """
@@ -61,3 +63,25 @@ def test_shipping_cost_1() -> None:
 def test_shipping_cost_10() -> None:
     """ tests shipping_cost for 10 """
     assert shipping_cost(10) == 20
+
+
+def grade_letter(score: int) -> str:
+    """ converts score into letter grade """
+    if score >= 90:
+        return "A"
+    elif 80 <= score < 90:
+        return "B"
+    elif 70 <= score < 80:
+        return "C"
+    elif 60 <= score < 70:
+        return "D"
+    else:
+        return "F"
+
+def test_grade_letter_65() -> None:
+    """ tests grade_letter for 65 """
+    assert grade_letter(65) == "D"
+
+def test_grade_letter_90() -> None:
+    """ tests grade_letter for 90 """
+    assert grade_letter(90) == "A"
